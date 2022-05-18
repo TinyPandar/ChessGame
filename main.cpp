@@ -14,7 +14,9 @@ Chess* chessMap[9][9];
 int sideFlag=0;//mark the term of which side
 time_t startTime;
 int main(){
-
+    ChessGenerator cg;
+    chessMap[5][5]= cg.generateChess("king",0);
+    cout<<chessMap[5][5]->getType();
 }
 
 
