@@ -1,13 +1,18 @@
 #include <iostream>
 #include <fcntl.h>
 #include "io.h"
-#include <ctime>
 #include "Chess.h"
 using namespace std;
-void printMap();
+void printCheckerboard();
 void printChess(Chess& chess);
+void printTime(time_t beginTime);
+void printRounds();
+void printBegin();
+void printEnd();
+void printTips();
 Chess* chessMap[9][9];
-
+int sideFlag=0;//mark the term of which side
+time_t startTime;
 int main(){
 
 }
