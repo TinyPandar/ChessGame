@@ -6,21 +6,18 @@
 using namespace std;
 
 class Chess{ //Create the chess with new, and when the chess is killed use delete
-private:
+protected:
     int side;//black or white
     string type;//the type of the chess
+    bool live;
     pair<int, int> position;
 public:
-    Chess(int s,string tp){
-        this->side = s;
-        this->type = tp;
-    }
     Chess(const Chess& obj){
         //copy function
     }
-    ~Chess(){
-        //when the chess was killed, perform this part
-    }
+
+    Chess() {}
+
     int getSide(){
         return side;
     }
@@ -33,12 +30,24 @@ public:
     void setPos(pair<int,int> position){
         this->position = position;
     }
-    virtual bool move() = 0;
+    bool getStatus(){
+        return live;
+    }
+    virtual bool move(){return false;};
 };
 
 class King : public Chess{
+public:
+    King(int sid){
+        type = "king";
+        side = sid;
+        live = true;
+    }
     bool move(){
 
+    }
+    void killed(){
+        live = false;
     }
 };
 class Queen : public Chess{
@@ -68,7 +77,13 @@ class Pawn : public Chess{
 };
 //工厂模式生成棋子
 class ChessGenerator{
+public:
+    Chess* generateChess(string type,int sid){
+        if(type == "king"){
+            return new King(sid);
+        }
 
-
+        return nullptr;
+    }
 };
 #endif //CHESSGAME_CHESS_H
