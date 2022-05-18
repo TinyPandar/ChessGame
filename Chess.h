@@ -1,11 +1,11 @@
 //
-// Created by FrankLee on 2022/5/18.
+// Update by FrankLee on 2022/5/19.
 //
 #ifndef CHESSGAME_CHESS_H
 #define CHESSGAME_CHESS_H
 using namespace std;
 
-class Chess{ //Create the chess with new, and when the chess is killed use delete
+class Chess{
 protected:
     int side;//black or white
     string type;//the type of the chess
@@ -27,8 +27,8 @@ public:
     pair<int,int> getPos(){
         return position;
     }
-    void setPos(pair<int,int> position){
-        this->position = position;
+    void setPos(pair<int,int> pos){
+        this->position = pos;
     }
     bool getStatus(){
         return live;
@@ -43,38 +43,84 @@ public:
         side = sid;
         live = true;
     }
+    void killed(){
+        live = false;
+    }
     bool move(){
 
+    }
+};
+class Queen : public Chess{
+public:
+    Queen(int sid){
+        type = "queen";
+        side = sid;
+        live = true;
     }
     void killed(){
         live = false;
     }
-};
-class Queen : public Chess{
     bool move(){
 
     }
 };
 class Knight : public Chess{
+public:
+    Knight(int sid){
+        type = "knight";
+        side = sid;
+        live = true;
+    }
+    void killed(){
+        live = false;
+    }
     bool move(){
 
     }
 };
 class Bishop : public Chess{
+public:
+    Bishop(int sid){
+        type = "bishop";
+        side = sid;
+        live = true;
+    }
+    void killed(){
+        live = false;
+    }
     bool move(){
 
     }
 };
 class Rook : public Chess{
+public:
+    Rook(int sid){
+        type = "rook";
+        side = sid;
+        live = true;
+    }
+    void killed(){
+        live = false;
+    }
     bool move(){
 
     }
 };
 class Pawn : public Chess{
+public:
+    Pawn(int sid){
+        type = "pawn";
+        side = sid;
+        live = true;
+    }
+    void killed(){
+        live = false;
+    }
     bool move(){
 
     }
 };
+
 //工厂模式生成棋子
 class ChessGenerator{
 public:
@@ -82,7 +128,21 @@ public:
         if(type == "king"){
             return new King(sid);
         }
-
+        if(type == "queen"){
+            return new Queen(sid);
+        }
+        if(type == "bishop"){
+            return new Bishop(sid);
+        }
+        if(type == "knight"){
+            return new Knight(sid);
+        }
+        if(type == "rook"){
+            return new Rook(sid);
+        }
+        if(type == "pawn"){
+            return new Pawn(sid);
+        }
         return nullptr;
     }
 };
