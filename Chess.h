@@ -16,6 +16,9 @@ public:
         this->side = s;
         this->type = tp;
     }
+    Chess(const Chess& obj){
+        //copy function
+    }
     int getSide(){
         return side;
     }
@@ -25,7 +28,12 @@ public:
     pair<int,int> getPos(){
         return position;
     }
-
+    void setPos(pair<int,int> position){
+        this.position = position;
+    }
+    void setLive(bool live){
+        this.live = live;
+    }
     virtual bool move() = 0;
 };
 
