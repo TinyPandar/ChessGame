@@ -36,32 +36,32 @@ public:
     virtual bool move() = 0;
 };
 
-class King : Chess{
+class King : public Chess{
     bool move(){
 
     }
 };
-class Queen : Chess{
+class Queen : public Chess{
     bool move(){
 
     }
 };
-class Knight : Chess{
+class Knight : public Chess{
     bool move(){
 
     }
 };
-class Bishop : Chess{
+class Bishop : public Chess{
     bool move(){
 
     }
 };
-class Rook : Chess{
+class Rook : public Chess{
     bool move(){
 
     }
 };
-class Pawn : Chess{
+class Pawn : public Chess{
     bool move(){
 
     }
