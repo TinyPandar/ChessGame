@@ -66,5 +66,9 @@ class Pawn : public Chess{
 
     }
 };
+//工厂模式生成棋子
+class ChessGenerator{
 
+
+};
 #endif //CHESSGAME_CHESS_H
