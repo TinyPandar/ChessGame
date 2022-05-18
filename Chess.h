@@ -5,10 +5,9 @@
 #define CHESSGAME_CHESS_H
 using namespace std;
 
-class Chess{
+class Chess{ //Create the chess with new, and when the chess is killed use delete
 private:
     int side;//black or white
-    bool live;//live or die
     string type;//the type of the chess
     pair<int, int> position;
 public:
@@ -18,6 +17,9 @@ public:
     }
     Chess(const Chess& obj){
         //copy function
+    }
+    ~Chess(){
+        //when the chess was killed, perform this part
     }
     int getSide(){
         return side;
@@ -29,40 +31,37 @@ public:
         return position;
     }
     void setPos(pair<int,int> position){
-        this.position = position;
-    }
-    void setLive(bool live){
-        this.live = live;
+        this->position = position;
     }
     virtual bool move() = 0;
 };
 
-class King : Chess{
+class King : public Chess{
     bool move(){
 
     }
 };
-class Queen : Chess{
+class Queen : public Chess{
     bool move(){
 
     }
 };
-class Knight : Chess{
+class Knight : public Chess{
     bool move(){
 
     }
 };
-class Bishop : Chess{
+class Bishop : public Chess{
     bool move(){
 
     }
 };
-class Rook : Chess{
+class Rook : public Chess{
     bool move(){
 
     }
 };
-class Pawn : Chess{
+class Pawn : public Chess{
     bool move(){
 
     }
