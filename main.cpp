@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fcntl.h>
-#include "io.h"
+#include <io.h>
+#include <conio.h>
+#include <windows.h>
 #include "Chess.h"
 #include "functions.h"
 using namespace std;
@@ -16,7 +18,14 @@ int sideFlag=0;//mark the term of which side
 time_t startTime;
 int main(){
     ChessGenerator cg;
-    chessMap[5][5]= cg.generateChess("king",0);
+    printCheckerboard();
+    chessMap[1][8]= cg.generateChess("queen",0);
+    chessMap[1][8]->setPos(make_pair(1,8));
     printChess(*chessMap[5][5]);
-    cout<<chessMap[5][5]->getType();
+    gotoxy(10,10);
+    getch();
+    return 0;
 }
+
+
+
