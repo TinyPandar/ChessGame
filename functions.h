@@ -24,4 +24,22 @@ void printChess(Chess& chess){
     }
     _setmode(_fileno(stdout),O_TEXT);
 }
+
+void printCheckerboard(){
+    printf("   |-----|-----|-----|-----|-----|-----|-----|-----|\n");
+    for (int i = 1; i < 8 + 1; ++i) {
+        printf("%2d ", 9 - i);
+        for (int j = 0; j < 8; j++) {
+            printf("|     ");
+        }
+        cout << "|\n";
+        for (int j = 0; j < 8; j++) {
+            printf("   |  ");
+        }
+        printf("\n   |-----|-----|-----|-----|-----|-----|-----|-----|\n");
+    }
+    printf("     a     b     c     d     e     f     g     h\n");
+    cout << endl;
+}
+
 #endif //CHESSGAME_FUNCTIONS_H
