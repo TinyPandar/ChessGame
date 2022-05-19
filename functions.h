@@ -1,9 +1,8 @@
-//
-// Created by FrankLee on 2022/5/18.
-//
-
 #ifndef CHESSGAME_FUNCTIONS_H
 #define CHESSGAME_FUNCTIONS_H
+
+
+
 using namespace std;
 void gotoxy(int x, int y) { //移动光标到（x，y）的函数
     COORD c;  //COORD为windows API中定义的一种结构，表示一个字符再控制台屏幕上的坐标
@@ -13,7 +12,7 @@ void gotoxy(int x, int y) { //移动光标到（x，y）的函数
 }
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
-    gotoxy(pos.first*6+1, pos.second*3+1);
+    gotoxy(pos.first*4, (9-pos.second)*2-1);
     _setmode(_fileno(stdout), _O_U16TEXT);
     if(chess.getSide() == 0){
         if(chess.getType() == "king") wcout<<L"\x265A";
@@ -34,20 +33,26 @@ void printChess(Chess& chess){
 }
 
 void printCheckerboard(){
-    printf("   |-----|-----|-----|-----|-----|-----|-----|-----|\n");
-    for (int i = 1; i < 8 + 1; ++i) {
-        printf("%2d ", 9 - i);
-        for (int j = 0; j < 8; j++) {
-            printf("|     ");
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    wcout<<L"  \x250F\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2513\n";
+    for (int i = 1; i <= 8; ++i) {
+        wcout<<9-i<<" ";
+        for (int j = 0; j <= 8; j++) {
+            wcout<<L"\x2503   ";
         }
-        cout << "|\n";
-        for (int j = 0; j < 8; j++) {
-            printf("   |  ");
+        wcout<<endl;
+        if(i==8)wcout<<L"  \x2517\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x253B\x2501\x2501\x2501\x251B\n";
+        else{
+            wcout << L"  \x2523";
+            for (int j = 0; j < 8; j++) {
+                wcout << L"\x2501\x2501\x2501\x254B";
+            }
+            wcout << endl;
         }
-        printf("\n   |-----|-----|-----|-----|-----|-----|-----|-----|\n");
     }
-    printf("     a     b     c     d     e     f     g     h\n");
+    wcout<<"    a   b   c   d   e   f   g   h\n";
     cout << endl;
+    _setmode(_fileno(stdout),O_TEXT);
 }
 
 
