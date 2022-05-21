@@ -30,14 +30,10 @@
    
    参数:无
 
-5. 打印移动是否合法
-   bool checkMoveRight()；
+~5. 打印移动是否合法bool checkMoveRight()；~
 
-   **通过棋子的getType方法来查看行走是否合法**
+   ~通过棋子的getType方法来查看行走是否合法~
 
-   类型:bool
-
-   参数:无
 
 6. 打印开始欢迎引导界面
    void printBegin();
