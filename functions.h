@@ -4,6 +4,13 @@
 
 
 using namespace std;
+void hideCursor() { //隐藏光标
+    CONSOLE_CURSOR_INFO cursor;
+    cursor.bVisible = FALSE;
+    cursor.dwSize = sizeof(cursor);
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorInfo(handle, &cursor);
+}
 void gotoxy(int x, int y) { //移动光标到（x，y）的函数
     COORD c;  //COORD为windows API中定义的一种结构，表示一个字符再控制台屏幕上的坐标
     c.X = x;
@@ -13,6 +20,10 @@ void gotoxy(int x, int y) { //移动光标到（x，y）的函数
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
     gotoxy(pos.first*4, (9-pos.second)*2-1);
+    if(chess.getStatus()==false) {
+        wcout<<" ";
+        return;
+    }
     _setmode(_fileno(stdout), _O_U16TEXT);
     if(chess.getSide() == 0){
         if(chess.getType() == "king") wcout<<L"\x265A";
@@ -30,6 +41,7 @@ void printChess(Chess& chess){
         if(chess.getType() == "pawn") wcout<<L"\x2659";
     }
     _setmode(_fileno(stdout),O_TEXT);
+
 }
 
 void printCheckerboard(){
@@ -45,7 +57,8 @@ void printCheckerboard(){
         else{
             wcout << L"  \x2523";
             for (int j = 0; j < 8; j++) {
-                wcout << L"\x2501\x2501\x2501\x254B";
+                if(j!=7)wcout << L"\x2501\x2501\x2501\x254B";
+                else wcout << L"\x2501\x2501\x2501\x252B";
             }
             wcout << endl;
         }
@@ -55,6 +68,50 @@ void printCheckerboard(){
     _setmode(_fileno(stdout),O_TEXT);
 }
 
-
+void initialize(){
+    ChessGenerator cg;
+    chessMap[4][1]=cg.generateChess("king",0)->setPos(make_pair(4,1));
+    chessMap[4][8]=cg.generateChess("king",1)->setPos(make_pair(4,8));
+    chessMap[5][1]=cg.generateChess("queen",0)->setPos(make_pair(5,1));
+    chessMap[5][8]=cg.generateChess("queen",1)->setPos(make_pair(5,8));
+    chessMap[3][1]=cg.generateChess("bishop",0)->setPos(make_pair(3,1));
+    chessMap[6][1]=cg.generateChess("bishop",0)->setPos(make_pair(6,1));
+    chessMap[3][8]=cg.generateChess("bishop",1)->setPos(make_pair(3,8));
+    chessMap[6][8]=cg.generateChess("bishop",1)->setPos(make_pair(6,8));
+    chessMap[2][1]=cg.generateChess("knight",0)->setPos(make_pair(2,1));
+    chessMap[7][1]=cg.generateChess("knight",0)->setPos(make_pair(7,1));
+    chessMap[2][8]=cg.generateChess("knight",1)->setPos(make_pair(2,8));
+    chessMap[7][8]=cg.generateChess("knight",1)->setPos(make_pair(7,8));
+    chessMap[1][1]=cg.generateChess("rook",0)->setPos(make_pair(1,1));
+    chessMap[8][1]=cg.generateChess("rook",0)->setPos(make_pair(8,1));
+    chessMap[1][8]=cg.generateChess("rook",1)->setPos(make_pair(1,8));
+    chessMap[8][8]=cg.generateChess("rook",1)->setPos(make_pair(8,8));
+    chessMap[1][2]=cg.generateChess("pawn",0)->setPos(make_pair(1,2));
+    chessMap[2][2]=cg.generateChess("pawn",0)->setPos(make_pair(2,2));
+    chessMap[3][2]=cg.generateChess("pawn",0)->setPos(make_pair(3,2));
+    chessMap[4][2]=cg.generateChess("pawn",0)->setPos(make_pair(4,2));
+    chessMap[5][2]=cg.generateChess("pawn",0)->setPos(make_pair(5,2));
+    chessMap[6][2]=cg.generateChess("pawn",0)->setPos(make_pair(6,2));
+    chessMap[7][2]=cg.generateChess("pawn",0)->setPos(make_pair(7,2));
+    chessMap[8][2]=cg.generateChess("pawn",0)->setPos(make_pair(8,2));
+    chessMap[1][7]=cg.generateChess("pawn",1)->setPos(make_pair(1,7));
+    chessMap[2][7]=cg.generateChess("pawn",1)->setPos(make_pair(2,7));
+    chessMap[3][7]=cg.generateChess("pawn",1)->setPos(make_pair(3,7));
+    chessMap[4][7]=cg.generateChess("pawn",1)->setPos(make_pair(4,7));
+    chessMap[5][7]=cg.generateChess("pawn",1)->setPos(make_pair(5,7));
+    chessMap[6][7]=cg.generateChess("pawn",1)->setPos(make_pair(6,7));
+    chessMap[7][7]=cg.generateChess("pawn",1)->setPos(make_pair(7,7));
+    chessMap[8][7]=cg.generateChess("pawn",1)->setPos(make_pair(8,7));
+    for (size_t i = 1; i < 9; i++)
+    {
+        for (size_t j = 1; j < 9; j++)
+        {
+            if(chessMap[i][j]!=NULL)
+                printChess(*chessMap[i][j]);
+        }
+        
+    }
+    
+}
 
 #endif //CHESSGAME_FUNCTIONS_H
