@@ -17,6 +17,41 @@ void gotoxy(int x, int y) { //移动光标到（x，y）的函数
     c.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c); //此函数是API中定位光标位置的函数
 }
+void printBegin(){
+    gotoxy(49,11);
+    cout<<"Chess Game";
+    gotoxy(29, 21);
+    cout<<"Welcome to the chess";
+    gotoxy(29, 23);
+    cout<<"Please choose number and press 'ENTER'";
+    gotoxy(29, 25);
+    cout<<"[1]play\t\t[2]exist";
+    gotoxy(45, 33);
+    cout<<"Tips:balbala";
+    gotoxy(1,1);
+    setcolor(14);          			//黄色边框
+    for (int i = 20; i <= 26; i++) { 	//输出上下边框┅
+        for (int j = 27; j <= 74; j++) { //输出左右边框┇
+            gotoxy(j, i);
+            if (i == 20 || i == 26) {
+                printf("-");
+            } else if (j == 27 || j == 74) {
+                printf("|");
+            }
+        }
+    }
+    while(1){
+        int x;
+        cin>>x;
+        if(x==1){
+            break;
+        }
+        else if(x==2){
+            exit(0);
+        }else
+            cout<<"Please put in the given number";
+    }
+}
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
     gotoxy(pos.first*4, (9-pos.second)*2-1);
