@@ -64,7 +64,6 @@ void printCheckerboard(){
         }
     }
     wcout<<"    a   b   c   d   e   f   g   h\n";
-    cout << endl;
     _setmode(_fileno(stdout),O_TEXT);
 }
 
