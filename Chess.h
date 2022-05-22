@@ -37,7 +37,9 @@ public:
     void dislove(){
         pair<int, int>pos = this->getPos();
         gotoxy(pos.first*4, (9-pos.second)*2-1);
+        _setmode(_fileno(stdout), _O_U16TEXT);
         wcout<<L"  ";
+        _setmode(_fileno(stdout),O_TEXT);
     }
     bool getStatus(){
         return live;
@@ -117,7 +119,7 @@ public:
         side = sid;
         live = true;
     }
-     bool move(int targetX,int targetY){
+    bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
 
          //移动方式判断并遍历是否合法，比如路径是否有阻挡
@@ -197,15 +199,39 @@ public:
     }
 };
 class Pawn : public Chess{
+    bool first=true;
+    int dir;
 public:
     Pawn(int sid){
         type = "pawn";
         side = sid;
         live = true;
+        if(side) dir = 1;
+        else dir = -1;
     }
-    // bool move(){
+    bool move(int targetX,int targetY){
+        if(targetY==position.second) return false;
+        if(dir*(targetY-position.second) > 0) return false;
 
-    // }
+        if(targetX==position.first){
+            if(abs(targetY - position.second) == 2){
+                if(!first) return false;
+                if(chessMap[targetX][targetY]!=NULL || chessMap[targetX][targetY+dir]!=NULL) return false;
+            }else if(abs(targetY - position.second) == 1){
+                if(chessMap[targetX][targetY]!=NULL) return false;
+            }else{
+                return false;
+            }
+        }else if(abs(targetX-position.first) == 1){
+            if(chessMap[targetX][targetY] == NULL) return false;
+            chessMap[targetX][targetY]->killed();
+        }
+
+        chessMap[position.first][position.second]->dislove();
+        chessMap[position.first][position.second]=NULL;
+        setPos(make_pair(targetX,targetY));
+        return true;
+     }
 };
 
 //工厂模式生成棋子
@@ -230,7 +256,7 @@ public:
         if(type == "pawn"){
             return new Pawn(sid);
         }
-        return nullptr;
+        return NULL;
     }
 };
 #endif //CHESSGAME_CHESS_H
