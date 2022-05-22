@@ -6,6 +6,7 @@
 using namespace std;
 class Chess;
 Chess* chessMap[9][9];
+bool whiteK=true,blackK=true;
 void gotoxy(int x, int y);
 void hideCursor();
 void printCheckerboard();
@@ -25,9 +26,13 @@ int main(){
      hideCursor();
      printCheckerboard();
      initialize();
-     cin>>sideFlag;
-     chessMap[5][1]->move(5,8);
-     cin>>sideFlag;
+     while(1){
+          int a,b,c,d;
+          gotoxy(0,20);
+          cin>>a>>b>>c>>d;
+          chessMap[a][b]->move(c,d);
+     }
+     
 }
 
 
