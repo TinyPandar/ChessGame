@@ -21,8 +21,8 @@ void initialize();
 #include "Chess.h"
 #include "functions.h"
 
-int sideFlag=0;//mark the term of which side
-time_t startTime;
+int sideFlag=0;//mark the term of which side.0 replace white,1 replace black.
+time_t startTime,blacktime,whitetime,t1,t2;
 int main(){
      printBegin();
      hideCursor();
