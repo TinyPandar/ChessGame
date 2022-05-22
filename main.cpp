@@ -23,6 +23,7 @@ void initialize();
 int sideFlag=0;//mark the term of which side
 time_t startTime;
 int main(){
+     printBegin();
      hideCursor();
      printCheckerboard();
      initialize();
