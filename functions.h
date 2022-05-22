@@ -21,6 +21,17 @@ int setColor(int c) {//for easier to change color
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);        //更改文字颜色
     return 0;
 }
+void changeSide(){//切换黑白下棋方
+    if(sideFlag==0){
+        sideFlag=1;
+        t1= time(NULL);
+        whitetime+=t1-t2;
+    }else{
+        sideFlag=0;
+        t2= time(NULL);
+        blacktime+=t2-t1;
+    }
+}
 void printBegin(){
     gotoxy(49,11);
     cout<<"Chess Game";
