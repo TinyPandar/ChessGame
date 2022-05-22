@@ -3,6 +3,7 @@
 #include <io.h>
 #include <conio.h>
 #include <windows.h>
+#include <ctime>
 using namespace std;
 class Chess;
 Chess* chessMap[9][9];
