@@ -116,9 +116,20 @@ public:
         side = sid;
         live = true;
     }
-    // bool move(int targetX,int targetY){
+     bool move(int targetX,int targetY){
+         if(targetY==position.second && targetX==position.first)return false;
 
-    // }
+         //移动方式判断并遍历是否合法，比如路径是否有阻挡
+
+         if(chessMap[targetX][targetY]!=NULL){
+             chessMap[targetX][targetY]->killed();
+             printChess(*chessMap[targetX][targetY]);
+         }
+         chessMap[position.first][position.second]->dislove();
+         chessMap[position.first][position.second]=NULL;
+         setPos(make_pair(targetX,targetY));
+         return true;
+     }
 };
 class Bishop : public Chess{
 public:
@@ -127,9 +138,28 @@ public:
         side = sid;
         live = true;
     }
-    // bool move(){
+    bool move(int targetX,int targetY){
+         if(targetY==position.second && targetX==position.first)return false;
 
-    // }
+         if(abs((targetX-position.first)/(targetY-position.second)) == 1){
+             int frX,toX,frY,toY;
+             frX=min(targetX,position.first)+1,toX=max(targetX,position.first);
+             frY=min(targetY,position.second)+1,toY=max(targetY,position.second);
+             while (frX!=toX && frY!=toY){
+                 if(chessMap[frX][frY]!=NULL) return false;
+                 frX++,frY++;
+             }
+         }
+
+         if(chessMap[targetX][targetY]!=NULL){
+             chessMap[targetX][targetY]->killed();
+             printChess(*chessMap[targetX][targetY]);
+         }
+         chessMap[position.first][position.second]->dislove();
+         chessMap[position.first][position.second]=NULL;
+         setPos(make_pair(targetX,targetY));
+         return true;
+     }
 };
 class Rook : public Chess{
 public:
@@ -138,9 +168,28 @@ public:
         side = sid;
         live = true;
     }
-    // bool move(){
+    bool move(int targetX,int targetY){
+        if(targetY==position.second && targetX==position.first)return false;
 
-    // }
+        if(targetX == position.first || targetY == position.second){
+            for (int i = position.first; i <= targetX; ++i) {
+                for (int j = position.second; j <= targetY; ++j) {
+                    if(i==position.first && j==position.second) continue;
+                    if(i == targetX && j == targetY) break;
+                    if(chessMap[i][j]!=NULL) return false;
+                }
+            }
+        }
+
+        if(chessMap[targetX][targetY]!=NULL){
+            chessMap[targetX][targetY]->killed();
+            printChess(*chessMap[targetX][targetY]);
+        }
+        chessMap[position.first][position.second]->dislove();
+        chessMap[position.first][position.second]=NULL;
+        setPos(make_pair(targetX,targetY));
+        return true;
+    }
 };
 class Pawn : public Chess{
 public:
