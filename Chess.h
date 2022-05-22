@@ -46,6 +46,10 @@ public:
     }
     void killed(){
         live = false;
+        if(this->getType()=="king"){
+            if(this->getSide() == 0) whiteK = false;
+            else blackK = false;
+        }
         dislove();
     }
     virtual bool move(int targetX,int targetY){return false;};
