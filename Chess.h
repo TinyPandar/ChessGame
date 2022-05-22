@@ -88,8 +88,7 @@ public:
                     if(chessMap[i][j]!=NULL) return false;
                 }
             }
-        }
-        if(abs((targetX-position.first)/(targetY-position.second)) == 1){
+        }else if(abs((targetX-position.first)/(targetY-position.second)) == 1){
             int frX,toX,frY,toY;
             frX=min(targetX,position.first)+1,toX=max(targetX,position.first);
             frY=min(targetY,position.second)+1,toY=max(targetY,position.second);
@@ -97,6 +96,8 @@ public:
                 if(chessMap[frX][frY]!=NULL) return false;
                 frX++,frY++;
             }
+        } else{
+            return false;
         }
 
         if(chessMap[targetX][targetY]!=NULL){
@@ -149,6 +150,8 @@ public:
                  if(chessMap[frX][frY]!=NULL) return false;
                  frX++,frY++;
              }
+         } else{
+             return false;
          }
 
          if(chessMap[targetX][targetY]!=NULL){
@@ -179,6 +182,8 @@ public:
                     if(chessMap[i][j]!=NULL) return false;
                 }
             }
+        }else{
+            return false;
         }
 
         if(chessMap[targetX][targetY]!=NULL){
