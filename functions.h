@@ -17,6 +17,10 @@ void gotoxy(int x, int y) { //移动光标到（x，y）的函数
     c.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c); //此函数是API中定位光标位置的函数
 }
+int setColor(int c) {//for easier to change color
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);        //更改文字颜色
+    return 0;
+}
 void printBegin(){
     gotoxy(49,11);
     cout<<"Chess Game";
@@ -29,7 +33,7 @@ void printBegin(){
     gotoxy(45, 33);
     cout<<"Tips:balbala";
     gotoxy(1,1);
-    setcolor(14);          			//黄色边框
+    setColor(14);          			//黄色边框
     for (int i = 20; i <= 26; i++) { 	//输出上下边框┅
         for (int j = 27; j <= 74; j++) { //输出左右边框┇
             gotoxy(j, i);
