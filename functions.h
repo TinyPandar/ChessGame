@@ -159,24 +159,9 @@ void initialize(){
             if(chessMap[i][j]!=NULL)
                 printChess(*chessMap[i][j]);
         }
-
+        
     }
-
+    
 }
-
-void reFlashChess(){
-    system("cls");
-    printCheckerboard();
-    for (size_t i = 1; i < 9; i++)
-    {
-        for (size_t j = 1; j < 9; j++)
-        {
-            if(chessMap[i][j]!=NULL)
-                printChess(*chessMap[i][j]);
-        }
-
-    }
-}
-
 
 #endif //CHESSGAME_FUNCTIONS_H
