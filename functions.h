@@ -165,6 +165,7 @@ void initialize(){
 }
 
 void reFlashChess(){
+    system("cls");
     printCheckerboard();
     for (size_t i = 1; i < 9; i++)
     {
