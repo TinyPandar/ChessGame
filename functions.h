@@ -59,6 +59,7 @@ void printBegin(){
     while(1){
         int x;
         cin>>x;
+        temp = getchar();
         if(x==1){
             break;
         }
