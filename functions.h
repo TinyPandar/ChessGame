@@ -38,7 +38,7 @@ void printBegin(){
     gotoxy(29, 21);
     cout<<"Welcome to the chess";
     gotoxy(29, 23);
-    cout<<"Please choose number and press 'ENTER'";
+    cout<<"Please choose number and press 'ENTER' twice";
     gotoxy(29, 25);
     cout<<"[1]play\t\t[2]exist";
     gotoxy(45, 33);
@@ -55,6 +55,7 @@ void printBegin(){
             }
         }
     }
+    gotoxy(36,28);
     while(1){
         int x;
         cin>>x;
