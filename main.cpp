@@ -27,6 +27,7 @@ void initialize();
 int main(){
      hideCursor();
      printBegin();
+     system("cls");
      printCheckerboard();
      initialize();
      while(1){
