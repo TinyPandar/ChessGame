@@ -64,6 +64,7 @@ int main() {
             temp = getchar();
             cout << "Please enter the position of the piece to go:(eg:a 3)";
             scanf("%c %c", &select_3, &select_4);
+            temp = getchar();
             intSelect_1 = select_1 - 96, intSelect_2 = select_2 - 48, intSelect_3 = select_3 - 96, intSelect_4 =
                     select_4 - 48;
             if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
@@ -72,6 +73,12 @@ int main() {
                     reFlashChess();
                     gotoxy(36, 26);
                     cout << "ERROR INPUT,Please Input white chess!" << endl;
+                    continue;
+                }
+                if (chessMap[intSelect_1][intSelect_2] == NULL){
+                    reFlashChess();
+                    gotoxy(36, 26);
+                    cout << "ERROR INPUT,Please check again!" << endl;
                     continue;
                 }
                 if (chessMap[intSelect_1][intSelect_2]->move(intSelect_3, intSelect_4)) {
@@ -87,7 +94,7 @@ int main() {
             } else {
                 reFlashChess();
                 gotoxy(36, 26);
-                cout << "ERROR INPUT,please check your Input again!" << endl;
+                wcout << "ERROR INPUT,please check your Input again!" << endl;
                 continue;
             }
 
@@ -106,6 +113,7 @@ int main() {
             temp = getchar();
             cout << "Please enter the position of the piece to go:(eg:a 3)";
             scanf("%c %c", &select_3, &select_4);
+            temp = getchar();
             intSelect_1 = select_1 - 96, intSelect_2 = select_2 - 48, intSelect_3 = select_3 - 96, intSelect_4 =
                     select_4 - 48;
             if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
