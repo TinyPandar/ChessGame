@@ -69,7 +69,6 @@ int main() {
             if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
                 intSelect_3 > 0 && intSelect_4 <= 8 && intSelect_4 > 0) {
                 if (chessMap[intSelect_1][intSelect_2]->getSide() != 0) {
-                    system("cls");
                     reFlashChess();
                     gotoxy(36, 26);
                     cout << "ERROR INPUT,Please Input white chess!" << endl;
@@ -77,18 +76,15 @@ int main() {
                 }
                 if (chessMap[intSelect_1][intSelect_2]->move(intSelect_3, intSelect_4)) {
                     turn++;
-                    system("cls");
                     reFlashChess();
                     continue;
                 } else {
                     gotoxy(36, 26);
-                    system("cls");
                     reFlashChess();
                     cout << "ERROR to move,please try again!" << endl;
                     continue;
                 }
             } else {
-                system("cls");
                 reFlashChess();
                 gotoxy(36, 26);
                 cout << "ERROR INPUT,please check your Input again!" << endl;
@@ -115,7 +111,6 @@ int main() {
             if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
                 intSelect_3 > 0 && intSelect_4 <= 8 && intSelect_4 > 0) {
                 if (chessMap[intSelect_1][intSelect_2]->getSide() != 1) {
-                    system("cls");
                     reFlashChess();
                     gotoxy(36, 26);
                     cout << "ERROR INPUT,Please Input black chess!" << endl;
@@ -123,18 +118,15 @@ int main() {
                 }
                 if (chessMap[intSelect_1][intSelect_2]->move(intSelect_3, intSelect_4)) {
                     turn++;
-                    system("cls");
                     reFlashChess();
                     continue;
                 } else {
                     gotoxy(36, 26);
-                    system("cls");
                     reFlashChess();
                     cout << "ERROR to move,please try again!" << endl;
                     continue;
                 }
             } else {
-                system("cls");
                 reFlashChess();
                 gotoxy(36, 26);
                 cout << "ERROR INPUT,please check your Input again!" << endl;
@@ -144,5 +136,6 @@ int main() {
         }
 
     }
+
 
 }
