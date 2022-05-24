@@ -226,7 +226,7 @@ public:
                 if(chessMap[targetX][targetY]!=NULL || chessMap[targetX][targetY+dir]!=NULL) return false;
             }else if(abs(targetY - position.second) == 1){
                 if(chessMap[targetX][targetY]!=NULL) return false;
-                //这里有问题
+                
             }else{
                 return false;
             }
