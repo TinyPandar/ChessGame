@@ -125,10 +125,13 @@ public:
     }
     bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
+        
+         //check whether the movement of Knight is correct
+         if(!( (abs(targetY - position.second) == 2 && abs(targetX - position.first) == 1) 
+         || (abs(targetY - position.second) == 1 && abs(targetX - position.first) == 2) )) return false;
 
-         //移动方式判断并遍历是否合法，比如路径是否有阻挡
-
-         if(chessMap[targetX][targetY]!=NULL){
+         if(chessMap[targetX][targetY] != NULL){
+             if( (*chessMap[targetX][targetY]).getSide() == (*chessMap[position.first][position.second]).getSide() ) return false;
              chessMap[targetX][targetY]->killed();
              printChess(*chessMap[targetX][targetY]);
          }
@@ -223,6 +226,7 @@ public:
                 if(chessMap[targetX][targetY]!=NULL || chessMap[targetX][targetY+dir]!=NULL) return false;
             }else if(abs(targetY - position.second) == 1){
                 if(chessMap[targetX][targetY]!=NULL) return false;
+                //这里有问题
             }else{
                 return false;
             }
@@ -234,6 +238,14 @@ public:
         chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
+        //兵变：
+        //输出当前兵子可以变了，然后提供变化的选项
+
+
+
+        //
+        //chessMap[targetX][targetY]->killed();
+        //chessMap[targetX][targetY] = 要变成的棋子
         return true;
      }
 };
