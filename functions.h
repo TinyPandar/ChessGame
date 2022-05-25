@@ -31,6 +31,11 @@ void changeSide(){//切换黑白下棋方
         t2= time(NULL);
         blacktime+=t2-t1;
     }
+    gotoxy(74, 22);
+    cout << "Now,it turns to ";
+    if(sideFlag==1)
+        cout<<"Black";
+    else cout<<"White";
 }
 void printBegin(){
     gotoxy(49,11);
