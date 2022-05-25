@@ -70,6 +70,36 @@ void printBegin(){
             cout<<"Please put in the given number";
     }
 }
+void printEnd(int side){
+    gotoxy(49,10);
+    cout<<"Game Over";
+    gotoxy(29, 12);
+    cout<<"Congratulations to ";
+    if(side==1)
+        cout<<"The Black won!!";
+    else
+        cout<<"The White won!!";
+    gotoxy(29, 14);
+    cout<<"total time used:"<<time(NULL)-startTime<<"seconds";
+    gotoxy(29, 16);
+    cout<<"Black time used:"<<blacktime<<"seconds";
+    gotoxy(29, 18);
+    cout<<"White time used:"<<whitetime<<"seconds";
+    setColor(14);          			//黄色边框
+    for (int i = 8; i <= 26; i++) { 	//输出上下边框┅
+        for (int j = 27; j <= 74; j++) { //输出左右边框┇
+            gotoxy(j, i);
+            if (i == 8 || i == 26) {
+                printf("-");
+            } else if (j == 27 || j == 74) {
+                printf("|");
+            }
+        }
+    }
+    int n;
+    cin>>n;
+    exit(0);
+}
 void printTime(){
     gotoxy(74, 20);
         cout << "Total time used:" << time(NULL) - startTime;
