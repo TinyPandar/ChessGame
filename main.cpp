@@ -4,6 +4,9 @@
 #include <conio.h>
 #include <windows.h>
 #include <ctime>
+#include <mutex>
+#include <pthread.h>
+
 
 using namespace std;
 
@@ -48,6 +51,7 @@ int main() {
     printBegin();
     system("cls");
     printCheckerboard();
+    startTime=time(NULL);
     initialize();
     /*
      * 进入核心函数
