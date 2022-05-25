@@ -45,8 +45,10 @@ void printBegin(){
     gotoxy(29, 23);
     cout<<"Please choose number and press 'ENTER' twice";
     gotoxy(29, 25);
+    setColor(11);
     cout<<"[1]play\t\t[2]exist";
     gotoxy(45, 33);
+    setColor(7);
     cout<<"Tips:balbala";
     gotoxy(1,1);
     setColor(14);          			//黄色边框
@@ -80,10 +82,12 @@ void printEnd(int side){
     cout<<"Game Over";
     gotoxy(29, 12);
     cout<<"Congratulations to ";
+    setColor(11);
     if(side==1)
         cout<<"The Black won!!";
     else
         cout<<"The White won!!";
+    setColor(7);
     gotoxy(29, 14);
     cout<<"total time used:"<<time(NULL)-startTime<<"seconds";
     gotoxy(29, 16);
