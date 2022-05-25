@@ -61,6 +61,7 @@ void printBegin(){
         cin>>x;
         temp = getchar();
         if(x==1){
+            setColor(7);
             break;
         }
         else if(x==2){
@@ -68,6 +69,10 @@ void printBegin(){
         }else
             cout<<"Please put in the given number";
     }
+}
+void printTime(){
+    gotoxy(74, 20);
+        cout << "Total time used:" << time(NULL) - startTime;
 }
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
