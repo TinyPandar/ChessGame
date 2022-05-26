@@ -4,7 +4,8 @@
 
 
 using namespace std;
-void hideCursor() { //隐藏光标
+//the function hiding the cursor on the terminal,which is learnt from the internet
+void hideCursor() { 
     CONSOLE_CURSOR_INFO cursor;
     cursor.bVisible = FALSE;
     cursor.dwSize = sizeof(cursor);
@@ -112,13 +113,16 @@ void printTime(){
     gotoxy(74, 20);
         cout << "Total time used:" << time(NULL) - startTime;
 }
+//the function that used to print the unicode character of the given referance of a chess;
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
     gotoxy(pos.first*4, (9-pos.second)*2-1);
+    //if the chess is dead so we clear its body
     if(chess.getStatus()==false) {
         wcout<<" ";
         return;
     }
+    //the method to print a unicode character in the terminal
     _setmode(_fileno(stdout), _O_U16TEXT);
     if(chess.getSide() == 0){
         if(chess.getType() == "king") wcout<<L"\x265A";
@@ -138,7 +142,7 @@ void printChess(Chess& chess){
     _setmode(_fileno(stdout),O_TEXT);
 
 }
-
+//print the checker board in unicode
 void printCheckerboard(){
     _setmode(_fileno(stdout), _O_U16TEXT);
     wcout<<L"  \x250F\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2533\x2501\x2501\x2501\x2513\n";
@@ -161,7 +165,7 @@ void printCheckerboard(){
     wcout<<"    a   b   c   d   e   f   g   h\n";
     _setmode(_fileno(stdout),O_TEXT);
 }
-
+//the initializing function that generate the chess and place them on the chessMap
 void initialize(){
     ChessGenerator cg;
     chessMap[4][1]=cg.generateChess("king",0)->setPos(make_pair(4,1));
@@ -196,6 +200,7 @@ void initialize(){
     chessMap[6][7]=cg.generateChess("pawn",1)->setPos(make_pair(6,7));
     chessMap[7][7]=cg.generateChess("pawn",1)->setPos(make_pair(7,7));
     chessMap[8][7]=cg.generateChess("pawn",1)->setPos(make_pair(8,7));
+    //after place them then we print them
     for (size_t i = 1; i < 9; i++)
     {
         for (size_t j = 1; j < 9; j++)
@@ -207,7 +212,7 @@ void initialize(){
     }
 
 }
-
+//in order to avoid some bugs on the vitrual system of mac, we use the method to clear the terminal and print the GUI again 
 void reFlashChess(){
     system("cls");
     printCheckerboard();
