@@ -72,6 +72,7 @@ public:
 
      bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
         if(abs(targetY-position.second)>1 || abs(targetX-position.first)>1) return false;
         if(chessMap[targetX][targetY]!=NULL){
             chessMap[targetX][targetY]->killed();
@@ -92,7 +93,7 @@ public:
     }
     bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
-        
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
         if(targetX == position.first || targetY == position.second){
             for (int i = position.first; i <= targetX; ++i) {
                 for (int j = position.second; j <= targetY; ++j) {
@@ -132,7 +133,7 @@ public:
     }
     bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
-        
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
          //check whether the movement of Knight is correct
          if(!( (abs(targetY - position.second) == 2 && abs(targetX - position.first) == 1) 
          || (abs(targetY - position.second) == 1 && abs(targetX - position.first) == 2) )) return false;
@@ -157,7 +158,7 @@ public:
     }
     bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
-
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
          if(abs((targetX-position.first)/(targetY-position.second)) == 1){
              int frX,toX,frY,toY;
              frX=min(targetX,position.first)+1,toX=max(targetX,position.first);
@@ -189,7 +190,7 @@ public:
     }
     bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
-
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
         if(targetX == position.first || targetY == position.second){
             for (int i = position.first; i <= targetX; ++i) {
                 for (int j = position.second; j <= targetY; ++j) {
@@ -225,7 +226,7 @@ public:
     bool move(int targetX,int targetY){
         if(targetY==position.second) return false;
         if(dir*(targetY-position.second) > 0) return false;
-
+        if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
         if(targetX==position.first){
             if(abs(targetY - position.second) == 2){
                 if(!first) return false;
