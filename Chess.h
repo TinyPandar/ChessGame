@@ -1,3 +1,6 @@
+//
+// Created by PBemmm on 2022/5/18.
+//
 #ifndef CHESSGAME_CHESS_H
 #define CHESSGAME_CHESS_H
 using namespace std;
@@ -28,7 +31,6 @@ public:
     Chess* setPos(const pair<int,int> pos){
         chessMap[pos.first][pos.second] = this;
         this->position = pos;
-        printChess(*chessMap[position.first][position.second]);
         return this;
     }
     //get whether the chess is still alive or dead
@@ -53,9 +55,11 @@ public:
     int getStep(int Turn){
         return this->step[Turn];
     }
+    bool first=true;
 };
 
 class King : public Chess{
+
 public:
     //the generator of the son class
     King(int sid){
@@ -65,15 +69,41 @@ public:
     }
     //the move function of the chess return whether the chess moved and make sure the road is legal
      bool move(int targetX,int targetY){
+        if(targetY == position.second && abs(targetX - position.first)==2){
+            if(!first) return false;
+            if(targetX<position.first){
+                if(chessMap[1][targetY]!=NULL && chessMap[1][targetY]->first){
+                    if(chessMap[2][targetY]==NULL && chessMap[3][targetY]==NULL){
+                        chessMap[position.first][position.second]=NULL;
+                        setPos(make_pair(targetX,targetY));
+                        chessMap[1][targetY]->first=false;
+                        chessMap[1][targetY]->setPos(make_pair(targetX+1,targetY));
+                        chessMap[1][targetY]=NULL;
+                        return true;
+                    }else return false;
+                }else return false;
+            }else{
+                if(chessMap[8][targetY]!=NULL && chessMap[8][targetY]->first){
+                    if(chessMap[7][targetY]==NULL && chessMap[6][targetY]==NULL && chessMap[5][targetY]==NULL){
+                        chessMap[position.first][position.second]=NULL;
+                        setPos(make_pair(targetX,targetY));
+                        chessMap[8][targetY]->first =false;
+                        chessMap[8][targetY]->setPos(make_pair(targetX-1,targetY));
+                        chessMap[8][targetY]=NULL;
+                        return true;
+                    }else return false;
+                }else return false;
+            }
+        }
         if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
         if(abs(targetY-position.second)>1 || abs(targetX-position.first)>1) return false;
         if(chessMap[targetX][targetY]!=NULL){
             chessMap[targetX][targetY]->killed();
-            printChess(*chessMap[targetX][targetY]);
         }
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
+        first = false;
         return true;
      }
 };
@@ -111,10 +141,10 @@ public:
 
         if(chessMap[targetX][targetY]!=NULL){
             chessMap[targetX][targetY]->killed();
-            printChess(*chessMap[targetX][targetY]);
         }
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
+        first = false;
         return true;
     }
 };
@@ -137,10 +167,10 @@ public:
          if(chessMap[targetX][targetY] != NULL){
              if( (*chessMap[targetX][targetY]).getSide() == (*chessMap[position.first][position.second]).getSide() ) return false;
              chessMap[targetX][targetY]->killed();
-             printChess(*chessMap[targetX][targetY]);
          }
          chessMap[position.first][position.second]=NULL;
          setPos(make_pair(targetX,targetY));
+         first = false;
          return true;
      }
 };
@@ -170,10 +200,10 @@ public:
 
          if(chessMap[targetX][targetY]!=NULL){
              chessMap[targetX][targetY]->killed();
-             printChess(*chessMap[targetX][targetY]);
          }
          chessMap[position.first][position.second]=NULL;
          setPos(make_pair(targetX,targetY));
+         first = false;
          return true;
      }
 };
@@ -184,6 +214,9 @@ public:
         type = "rook";
         side = sid;
         live = true;
+    }
+    bool ifFirst(){
+        return first;
     }
     //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
@@ -202,16 +235,15 @@ public:
         }
         if(chessMap[targetX][targetY]!=NULL){
             chessMap[targetX][targetY]->killed();
-            printChess(*chessMap[targetX][targetY]);
         }
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
+        first =false;
         return true;
     }
 };
 class Pawn : public Chess{
-    //private attributes that make sure the pawn move foward and the correct steps
-    bool first=true;
+    //attributes that make sure the pawn move foward
     int dir;
 public:
     //the generator of the son class
