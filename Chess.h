@@ -1,6 +1,3 @@
-//
-// Created by PBemmm on 2022/5/18.
-//
 #ifndef CHESSGAME_CHESS_H
 #define CHESSGAME_CHESS_H
 using namespace std;
@@ -9,54 +6,50 @@ class Chess{
 protected:
     int side;// 0 refer to white and 1 refer to black
     string type;//the type of the chess
-    bool live;
+    bool live;//the staus whether the chess is still alive or dead
     pair<int, int> position;//first X second Y
     int step[500];
 public:
-    Chess(const Chess& obj){
-        //copy function
-
-    }
-
+    //the generator that has no parameter
     Chess() {}
-
+    //the function that get the side of the chess. In order to protect the inner data, we used these functions to avoid changing them
     int getSide(){
         return side;
     }
+    //get the type of the chess
     string getType(){
         return type;
     }
+    //get the position of the chess
     pair<int,int> getPos(){
         return position;
     }
+    //set the position of the chess, I used the Chess* to return because it's easier to store them in chessMap
     Chess* setPos(const pair<int,int> pos){
         chessMap[pos.first][pos.second] = this;
         this->position = pos;
         printChess(*chessMap[position.first][position.second]);
         return this;
     }
-    void dislove(){
-        pair<int, int>pos = this->getPos();
-        gotoxy(pos.first*4, (9-pos.second)*2-1);
-        _setmode(_fileno(stdout), _O_U16TEXT);
-        wcout<<L"  ";
-        _setmode(_fileno(stdout),O_TEXT);
-    }
+    //get whether the chess is still alive or dead
     bool getStatus(){
         return live;
     }
+    //make some chess killed and if the chess is king then the game is over
     void killed(){
         live = false;
         if(this->getType()=="king"){
             if(this->getSide() == 0) whiteK = false;
             else blackK = false;
         }
-        dislove();
     }
+    //virtual method to make the function dynamic linked
     virtual bool move(int targetX,int targetY){return false;};
+
     void setStep(int Turn, int Step){
         this->step[Turn] = Step; 
     }
+
     int getStep(int Turn){
         return this->step[Turn];
     }
@@ -64,12 +57,13 @@ public:
 
 class King : public Chess{
 public:
+    //the generator of the son class
     King(int sid){
         type = "king";
         side = sid;
         live = true;
     }
-
+    //the move function of the chess return whether the chess moved and make sure the road is legal
      bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
@@ -78,7 +72,6 @@ public:
             chessMap[targetX][targetY]->killed();
             printChess(*chessMap[targetX][targetY]);
         }
-        chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
         return true;
@@ -86,11 +79,13 @@ public:
 };
 class Queen : public Chess{
 public:
+    //the generator of the son class
     Queen(int sid){
         type = "queen";
         side = sid;
         live = true;
     }
+    //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
@@ -118,7 +113,6 @@ public:
             chessMap[targetX][targetY]->killed();
             printChess(*chessMap[targetX][targetY]);
         }
-        chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
         return true;
@@ -126,11 +120,13 @@ public:
 };
 class Knight : public Chess{
 public:
+    //the generator of the son class
     Knight(int sid){
         type = "knight";
         side = sid;
         live = true;
     }
+    //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
@@ -143,7 +139,6 @@ public:
              chessMap[targetX][targetY]->killed();
              printChess(*chessMap[targetX][targetY]);
          }
-         chessMap[position.first][position.second]->dislove();
          chessMap[position.first][position.second]=NULL;
          setPos(make_pair(targetX,targetY));
          return true;
@@ -151,11 +146,13 @@ public:
 };
 class Bishop : public Chess{
 public:
+    //the generator of the son class
     Bishop(int sid){
         type = "bishop";
         side = sid;
         live = true;
     }
+    //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
          if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
@@ -175,7 +172,6 @@ public:
              chessMap[targetX][targetY]->killed();
              printChess(*chessMap[targetX][targetY]);
          }
-         chessMap[position.first][position.second]->dislove();
          chessMap[position.first][position.second]=NULL;
          setPos(make_pair(targetX,targetY));
          return true;
@@ -183,11 +179,13 @@ public:
 };
 class Rook : public Chess{
 public:
+    //the generator of the son class
     Rook(int sid){
         type = "rook";
         side = sid;
         live = true;
     }
+    //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
         if(targetY==position.second && targetX==position.first)return false;
         if(chessMap[targetX][targetY] != NULL && chessMap[targetX][targetY]->getSide()==getSide()) return false;
@@ -206,16 +204,17 @@ public:
             chessMap[targetX][targetY]->killed();
             printChess(*chessMap[targetX][targetY]);
         }
-        chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
         return true;
     }
 };
 class Pawn : public Chess{
+    //private attributes that make sure the pawn move foward and the correct steps
     bool first=true;
     int dir;
 public:
+    //the generator of the son class
     Pawn(int sid){
         type = "pawn";
         side = sid;
@@ -223,6 +222,7 @@ public:
         if(side) dir = 1;
         else dir = -1;
     }
+    //the move function of the chess return whether the chess moved and make sure the road is legal
     bool move(int targetX,int targetY){
         if(targetY==position.second) return false;
         if(dir*(targetY-position.second) > 0) return false;
@@ -250,7 +250,6 @@ public:
             else chessMap[targetX][targetY]->killed();
         }
         this->setStep(turn, abs(position.second - targetY));
-        chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
         //Promotion / 兵升变
@@ -315,7 +314,7 @@ public:
      }
 };
 
-//工厂模式生成棋子
+//use the factory method to generate the chess object
 class ChessGenerator{
 public:
     Chess* generateChess(string type,int sid){
