@@ -59,15 +59,22 @@ int main() {
     while (whiteK && blackK) {
         mainMove(turn % 2);
     }
-    if (whiteK == false) win = 1;
-    else win = 0;
+    t1 = time(NULL);
+    if (whiteK == false){
+        win = 1;
+        blacktime += t1 - t2;
+    }else{
+        win = 0;
+        whitetime += t1 - t2;
+    }
+    system("cls");
     printEnd(win);
     return 0;
 }
 
 void mainMove(int size) {
     fflush(stdin);
-    gotoxy(36, 28);
+    gotoxy(36, 20);
     t1 = time(NULL);
     if (size == 0) {
         cout << "Now is Turn to White!" << endl;
@@ -86,16 +93,16 @@ void mainMove(int size) {
             select_4 - 48;
     if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
         intSelect_3 > 0 && intSelect_4 <= 8 && intSelect_4 > 0) {
-        if (chessMap[intSelect_1][intSelect_2]->getSide() != size) {
-            reFlashChess();
-            gotoxy(36, 26);
-            cout << "ERROR INPUT,Please Input white chess!" << endl;
-            return;
-        }
         if (chessMap[intSelect_1][intSelect_2] == NULL) {
             reFlashChess();
-            gotoxy(36, 26);
+            gotoxy(40, 15);
             cout << "ERROR INPUT,Please check again!" << endl;
+            return;
+        }
+        if (chessMap[intSelect_1][intSelect_2]->getSide() != size) {
+            reFlashChess();
+            gotoxy(40, 15);
+            cout << "ERROR INPUT,Please Input white chess!" << endl;
             return;
         }
         if (chessMap[intSelect_1][intSelect_2]->move(intSelect_3, intSelect_4)) {
@@ -104,14 +111,14 @@ void mainMove(int size) {
             reFlashChess();
             return;
         } else {
-            gotoxy(36, 26);
+            gotoxy(40, 15);
             reFlashChess();
             cout << "ERROR to move,please try again!" << endl;
             return;
         }
     } else {
         reFlashChess();
-        gotoxy(36, 26);
+        gotoxy(40, 15);
         wcout << "ERROR INPUT,please check your Input again!" << endl;
         return;
     }
