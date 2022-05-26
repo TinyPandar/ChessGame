@@ -66,7 +66,7 @@ int main() {
 }
 
 void mainMove(int size) {
-
+    fflush(stdin);
     gotoxy(36, 28);
     t1 = time(NULL);
     if (size == 0) {
