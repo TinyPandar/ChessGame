@@ -273,7 +273,7 @@ public:
             if(chessMap[targetX][targetY] == NULL){
                 if(chessMap[targetX][position.second] == NULL) 
                     return false;
-                //过路卒
+                //Crossing the soldiers
                 if(this->getSide() != chessMap[targetX][position.second]->getSide() && chessMap[targetX][position.second]->getStep(turn-1) == 2){
                     chessMap[targetX][position.second]->killed();
                 }
@@ -284,7 +284,7 @@ public:
         this->setStep(turn, abs(position.second - targetY));
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
-        //Promotion / 兵升变
+        //Promotion
         if(position.second == 8 && this->getSide() == 0){
             gotoxy(36, 23);
             cout << "Promotion! : " << endl;
