@@ -63,11 +63,14 @@
    2. bool live;//live or die
    3. string type;//the type of the chess
    4. pair<int, int> position;
+   5. int step[500];//the number of moves a piece makes in a turn
 2. 公有方法
    1. int getSide();	//get the side of the chess(Black,White)
    2. string getType();    //get the type of the ches(King,Quen,Knight)
    3. pair<int,int> getPos();    //get the position of the chess on the map
    4. virtual bool move() = 0;    //the way chess move(Pure virtual function watiting for the derived class to  
+   5. void setStep(int Turn, int Step);    //record the number of moves a piece makes in a turn
+   6. int getStep(int Turn);    //get the number of moves a piece makes in a turn
 
 ### 全局变量
 
