@@ -52,7 +52,7 @@ int main() {
     startTime = time(NULL);
     initialize();
     /*
-     * 进入核心函数
+     * Enter the core loop
      */
     while (whiteK && blackK) {
         mainMove(turn % 2);
