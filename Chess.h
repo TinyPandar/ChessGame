@@ -252,12 +252,47 @@ public:
         chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
-        //兵变：输出当前兵子可以变了，然后提供变化的选项
+        //Promotion / 兵升变
+        if(position.second == 8 && this->getSide() == 0){
+            gotoxy(36, 23);
+            cout << "Promotion : " << endl;
+            gotoxy(36, 24);
+            cout << "Input : Q (Queen) / K (Knight) / B (Bishop) / R (Rook) to choose :";
+            char choice;
+            cin >> choice;
+            if(choice == 'Q'){
 
+            }
+            if(choice == 'K'){
+                
+            }
+            if(choice == 'B'){
+                
+            }
+            if(choice == 'R'){
+                
+            }
+        }
+        if(position.second == 1 && this->getSide() == 1){
+            gotoxy(36, 23);
+            cout << "Promotion : " << endl;
+            gotoxy(36, 24);
+            cout << "Input : Q (Queen) / K (Knight) / B (Bishop) / R (Rook) to choose :";
+            char choice;
+            cin >> choice;
+            if(choice == 'Q'){
 
-        //
-        //chessMap[targetX][targetY]->killed();
-        //chessMap[targetX][targetY] = 要变成的棋子
+            }
+            if(choice == 'K'){
+                
+            }
+            if(choice == 'B'){
+                
+            }
+            if(choice == 'R'){
+                
+            }
+        }
         return true;
      }
 };
