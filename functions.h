@@ -25,11 +25,11 @@ void changeSide(){//切换黑白下棋方
     if(sideFlag==0){
         sideFlag=1;
         t1= time(NULL);
-        whitetime+=t1-t2;
+        whitetime += t1-t2;
     }else{
         sideFlag=0;
-        t2= time(NULL);
-        blacktime+=t2-t1;
+        t1= time(NULL); 
+        blacktime += t1-t2;
     }
     gotoxy(74, 22);
     cout << "Now,it turns to ";
@@ -88,7 +88,7 @@ void printEnd(int side){
         cout<<"The White won!!";
     setColor(7);
     gotoxy(29, 14);
-    cout<<"total time used:"<<time(NULL)-startTime<<"seconds";
+    cout<<"total time used:"<<totalTime<<"seconds";
     gotoxy(29, 16);
     cout<<"Black time used:"<<blacktime<<"seconds";
     gotoxy(29, 18);
