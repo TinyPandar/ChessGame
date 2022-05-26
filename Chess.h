@@ -1,5 +1,5 @@
 //
-// Created by FrankLee on 2022/5/18.
+// Created by PBemmm on 2022/5/18.
 //
 #ifndef CHESSGAME_CHESS_H
 #define CHESSGAME_CHESS_H
@@ -11,6 +11,7 @@ protected:
     string type;//the type of the chess
     bool live;
     pair<int, int> position;//first X second Y
+    int step[500];
 public:
     Chess(const Chess& obj){
         //copy function
@@ -53,6 +54,12 @@ public:
         dislove();
     }
     virtual bool move(int targetX,int targetY){return false;};
+    void setStep(int Turn, int Step){
+        this->step[Turn] = Step; 
+    }
+    int getStep(int Turn){
+        return this->step[Turn];
+    }
 };
 
 class King : public Chess{
@@ -194,7 +201,6 @@ public:
         }else{
             return false;
         }
-
         if(chessMap[targetX][targetY]!=NULL){
             chessMap[targetX][targetY]->killed();
             printChess(*chessMap[targetX][targetY]);
@@ -231,16 +237,22 @@ public:
                 return false;
             }
         }else if(abs(targetX-position.first) == 1){
-            if(chessMap[targetX][targetY] == NULL) return false;
-            chessMap[targetX][targetY]->killed();
+            if(chessMap[targetX][targetY] == NULL){
+                if(chessMap[targetX][position.second] == NULL) 
+                    return false;
+                //过路卒
+                if(this->getSide() != chessMap[targetX][position.second]->getSide() && chessMap[targetX][position.second]->getStep(turn-1) == 2){
+                    chessMap[targetX][position.second]->killed();
+                }
+                else return false;
+            }
+            else chessMap[targetX][targetY]->killed();
         }
-
+        this->setStep(turn, abs(position.second - targetY));
         chessMap[position.first][position.second]->dislove();
         chessMap[position.first][position.second]=NULL;
         setPos(make_pair(targetX,targetY));
-        //兵变：
-        //输出当前兵子可以变了，然后提供变化的选项
-
+        //兵变：输出当前兵子可以变了，然后提供变化的选项
 
 
         //
