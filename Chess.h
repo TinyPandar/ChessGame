@@ -255,44 +255,61 @@ public:
         //Promotion / 兵升变
         if(position.second == 8 && this->getSide() == 0){
             gotoxy(36, 23);
-            cout << "Promotion : " << endl;
+            cout << "Promotion! : " << endl;
             gotoxy(36, 24);
-            cout << "Input : Q (Queen) / K (Knight) / B (Bishop) / R (Rook) to choose :";
+            cout << "Input : Q / K / B / R  to transform pawn into Queen / Knight / Bishop / Rook :";
             char choice;
             cin >> choice;
             if(choice == 'Q'){
-
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Queen(0);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'K'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Knight(0);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'B'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Bishop(0);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'R'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Rook(0);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
         }
         if(position.second == 1 && this->getSide() == 1){
             gotoxy(36, 23);
-            cout << "Promotion : " << endl;
+            cout << "Promotion! " << endl;
             gotoxy(36, 24);
-            cout << "Input : Q (Queen) / K (Knight) / B (Bishop) / R (Rook) to choose :";
+            cout << "Input : Q / K / B / R  to transform pawn into Queen / Knight / Bishop / Rook :";
             char choice;
             cin >> choice;
             if(choice == 'Q'){
-
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Queen(1);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'K'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Knight(1);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'B'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Bishop(1);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
             if(choice == 'R'){
-                
+                chessMap[targetX][targetY] -> killed();
+                chessMap[targetX][targetY] = new Rook(1);
+                chessMap[targetX][targetY] -> setPos(make_pair(targetX, targetY));
             }
         }
+        first = false;
         return true;
      }
 };
