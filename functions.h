@@ -226,7 +226,7 @@ void reFlashChess(){
 
     }
 }
-
+//Here the core movement calls the movement methods of each class
 void mainMove(int size) {
     fflush(stdin);
     gotoxy(36, 20);
@@ -246,20 +246,24 @@ void mainMove(int size) {
     fflush(stdin);
     intSelect_1 = select_1 - 96, intSelect_2 = select_2 - 48, intSelect_3 = select_3 - 96, intSelect_4 =
             select_4 - 48;
+    //Determine whether to move around the board
     if (intSelect_1 <= 8 && intSelect_1 > 0 && intSelect_2 <= 8 && intSelect_2 > 0 && intSelect_3 <= 8 &&
         intSelect_3 > 0 && intSelect_4 <= 8 && intSelect_4 > 0) {
+        //Check if a piece is selected
         if (chessMap[intSelect_1][intSelect_2] == NULL) {
             reFlashChess();
             gotoxy(45, 15);
             cout << "ERROR INPUT,Please check again!" << endl;
             return;
         }
+        //Determine if the party meets the requirements
         if (chessMap[intSelect_1][intSelect_2]->getSide() != size) {
             reFlashChess();
             gotoxy(45, 15);
             cout << "ERROR INPUT,Please Input white chess!" << endl;
             return;
         }
+        //Load the class move method
         if (chessMap[intSelect_1][intSelect_2]->move(intSelect_3, intSelect_4)) {
             turn++;
             changeSide();
@@ -268,7 +272,6 @@ void mainMove(int size) {
         } else {
             reFlashChess();
             gotoxy(45, 15);
-
             cout << "ERROR to move,please try again!" << endl;
             return;
         }
