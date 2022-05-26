@@ -22,10 +22,10 @@ void gotoxy(int x, int y) { //移动光标到（x，y）的函数
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c); //此函数是API中定位光标位置的函数
 }
 int setColor(int c) {//for easier to change color
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);        //更改文字颜色
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);      //for easier to change color
     return 0;
 }
-void changeSide(){//切换黑白下棋方
+void changeSide(){//change the side between black and white
     if(sideFlag==0){
         sideFlag=1;
         t1= time(NULL);
@@ -41,7 +41,7 @@ void changeSide(){//切换黑白下棋方
         cout<<"Black";
     else cout<<"White";
 }
-void printBegin(){
+void printBegin(){//print the welcome interface
     gotoxy(49,11);
     cout<<"Chess Game";
     gotoxy(29, 21);
@@ -55,9 +55,9 @@ void printBegin(){
     setColor(7);
     cout<<"Tips:balbala";
     gotoxy(1,1);
-    setColor(14);          			//黄色边框
-    for (int i = 20; i <= 26; i++) { 	//输出上下边框┅
-        for (int j = 27; j <= 74; j++) { //输出左右边框┇
+    setColor(14);          			//Yellow border
+    for (int i = 20; i <= 26; i++) { 	//Output left and right
+        for (int j = 27; j <= 74; j++) {//Output upper and lower
             gotoxy(j, i);
             if (i == 20 || i == 26) {
                 printf("-");
@@ -67,7 +67,7 @@ void printBegin(){
         }
     }
     gotoxy(36,28);
-    while(1){
+    while(1){     //give choice
         int x;
         cin>>x;
         if(x==1){
@@ -80,7 +80,7 @@ void printBegin(){
             cout<<"Please put in the given number";
     }
 }
-void printEnd(int side){
+void printEnd(int side){//print the end interface
     gotoxy(49,10);
     cout<<"Game Over";
     gotoxy(29, 12);
@@ -97,9 +97,9 @@ void printEnd(int side){
     cout<<"Black time used:"<<blacktime<<"seconds";
     gotoxy(29, 18);
     cout<<"White time used:"<<whitetime<<"seconds";
-    setColor(14);          			//黄色边框
-    for (int i = 8; i <= 26; i++) { 	//输出上下边框┅
-        for (int j = 27; j <= 74; j++) { //输出左右边框┇
+    setColor(14);          			//Yellow border
+    for (int i = 8; i <= 26; i++) { 	//Output left and right
+        for (int j = 27; j <= 74; j++) {//Output upper and lower
             gotoxy(j, i);
             if (i == 8 || i == 26) {
                 printf("-");
@@ -112,10 +112,7 @@ void printEnd(int side){
     cin>>n;
     exit(0);
 }
-void printTime(){
-    gotoxy(74, 20);
-        cout << "Total time used:" << time(NULL) - startTime;
-}
+
 //the function that used to print the unicode character of the given referance of a chess;
 void printChess(Chess& chess){
     pair<int, int>pos = chess.getPos();
